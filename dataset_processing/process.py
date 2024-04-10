@@ -4,7 +4,7 @@ import pandas as pd
 def load_product_dict():
     # Load the product dictionary from products.csv
     products_df = pd.read_csv('products.csv')
-    product_dict = {product: i for i, product in enumerate(products_df['product'])}
+    product_dict = {product: i for i, product in products_df.items()}
     return product_dict
 
 
