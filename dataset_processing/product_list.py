@@ -6,22 +6,23 @@ import time
 
 def generate_unique_product_list():
     products = {}
-    users = os.listdir("data/")
+    data_path = "minimized_data/"
+    users = os.listdir(data_path)
     for user in tqdm(users, desc="Processing Users"):
 
-        train = pd.read_csv("data/" + user + "/train.csv")
-        test = pd.read_csv("data/" + user + "/test.csv")
+        train = pd.read_csv(data_path + user + "/train.csv")
+        # test = pd.read_csv(data_path + user + "/test.csv")
         for index, row in train.iterrows():
             products[row['product_id']] = row['name']
-        for index, row in test.iterrows():
-            products[row['product_id']] = row['name']
+        # for index, row in test.iterrows():
+        #     products[row['product_id']] = row['name']
 
     # Create a DataFrame for unique products
     products_df = pd.DataFrame({'id': list(products.keys()),
                                 'name': list(products.values())})
 
     # Save the unique products to a CSV file
-    products_df.to_csv('products.csv', index=False)
+    products_df.to_csv('minimized_products.csv', index=False)
 
     print("Unique Product List saved to products.csv")
 
@@ -44,7 +45,6 @@ def check_products():
                 order_id.append(dict[row['order_id']])
                 product_id.append(dict[row['product_id']])
                 print(dict[row['product_id']], " - ", row['name'])
-                time.sleep(1)
         for index, row in test.iterrows():
             if products.loc[products['id'] == row['product_id'], 'name'].values[0] != row['name']:
                 user_name.append(user)
@@ -59,5 +59,5 @@ def check_products():
     df.to_csv('duplicate_products.csv', index=False)
 
 
-# generate_unique_product_list()
-check_products()
+generate_unique_product_list()
+# check_products()
