@@ -33,6 +33,7 @@ class Products:
             try:
                 self.user_purchase_data = pd.read_csv(f'cache/{self.user_id}.csv')
                 self.last_five_orders()
+                self.make_suggestions()
             except FileNotFoundError:
                 columns = [str(i) for i in range(1, 21)]
                 user_purchase_data = pd.DataFrame(columns=columns)
@@ -71,6 +72,11 @@ if 'cart' not in st.session_state:
 if 'suggestion' not in st.session_state:
     st.session_state.suggestion = []
 
+if products.suggestions is None:
+    st.session_state.suggestion = []
+else:
+    st.session_state.suggestion = products.suggestions
+
 suggestion_section, product_section, cart_section = st.columns([0.25, 0.45, 0.3], gap="large")
 with st.sidebar:
     products.user_id = st.text_input("Username")
@@ -80,6 +86,7 @@ with st.sidebar:
 
 with suggestion_section:
     st.header("Suggestions")
+    st.session_state.suggestion = products.suggestions if products.suggestions is not None else []
 
     for index, count in enumerate(st.session_state.suggestion):
         if count == 1:
