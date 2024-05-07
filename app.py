@@ -63,8 +63,26 @@ class Products:
 userid = None
 products = Products(userid)
 
-sample_image_url = "https://via.placeholder.com/150"
-
+sample_image_url = ["https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTU3KisAtQ0WwwUVh9CRbByRi3r5l3G9-9SwDySA8y-MA&s",
+                    "https://www.jiomart.com/images/product/original/491695705/fortune-maida-refined-wheat-flour-500-g-product-images-o491695705-p590040929-0-202306091505.jpg?im=Resize=(1000,1000)",
+                    "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRX162ENc-omb8zqTMQbS-r_gM2E_kdvhYiKAn-tyZhaA&s",
+                    "https://upload.wikimedia.org/wikipedia/commons/thumb/8/89/Tomato_je.jpg/1200px-Tomato_je.jpg",
+                    "https://images.immediate.co.uk/production/volatile/sites/30/2017/01/Bunch-of-bananas-67e91d5.jpg?quality=90&resize=440,400",
+                    "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTcP6XM0U-qVvgjkDvS407aOCTQKmVabZWhQfDkQ0SR4Q&s",
+                    "https://www.bigbasket.com/media/uploads/p/xl/40248005-2_1-amul-buffalo-milk-uht-treated-calcium-rich-no-preservatives.jpg",
+                    "https://www.bigbasket.com/media/uploads/p/l/40281258_1-milky-mist-greek-yogurt-natural-high-protein-no-added-sugar.jpg",
+                    "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTmnbJkb_PoRWq2flcWdCf2nP--YF5joP7IfslRb-E5Mw&s",
+                    "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQUQ0qM3pCPViJo8D9h98o4KfSJL980oEVQrME0-q8Ylg&s",
+                    "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT6EB2saqlZvlqp3D_VhRj43lLSSE27lljCJDQH5x1P6A&s",
+                    "https://5.imimg.com/data5/BU/TM/MY-60738954/fresh-salmon-fish-500x500.jpg",
+                    "https://images-cdn.ubuy.co.in/650fba357845e21c616bd7b8-kirkland-signature-extra-fancy-mixed.jpg",
+                    "https://m.media-amazon.com/images/I/71kOsITKSkL._AC_UF1000,1000_QL80_.jpg",
+                    "https://www.tatanutrikorner.com/cdn/shop/products/61kPDKZHGRL._SX679.jpg?v=1709816226",
+                    "https://m.media-amazon.com/images/I/61AZt0aOGoL._AC_UF894,1000_QL80_.jpg",
+                    "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTJV4q9dGUWsMLkzTFmy6V42PNwxhkol2UEyW61an1hUA&s",
+                    "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRvIeI0offkLfFvq31WJX_OJDK2USLwrQ_07Z6BdRTtnQ&s",
+                    "https://www.bigbasket.com/media/uploads/p/l/10000459_13-bb-royal-refined-sugar-sulphurless.jpg",
+                    "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSCYsP_i4SakA8lnLT5KqHdmq6ofYDFziXlOSC6jpUSOA&s"]
 if 'purchase_counts' not in st.session_state:
     st.session_state.purchase_counts = [0] * len(products.item_names)
 if 'cart' not in st.session_state:
@@ -106,7 +124,8 @@ with product_section:
             if index < len(products.item_names):
                 with cols[j]:
                     with st.container():
-                        st.image(sample_image_url, width=100)  # Display the product image
+                        print(index)
+                        st.image(sample_image_url[index], width=100)  # Display the product image
                         st.write(products.item_names[index])  # Display the product name
                         if st.button(f"Buy", key=f"buy_{index}"):
                             st.write(f"{products.item_names[index]} is added to cart.")
